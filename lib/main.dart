@@ -25,6 +25,14 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  List<Widget> score = [
+    Icon(
+      Icons.check,
+      color: Colors.green,
+    ),
+    Icon(Icons.close, color: Colors.red),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -53,7 +61,16 @@ class _QuizPageState extends State<QuizPage> {
                 'True',
                 style: TextStyle(fontSize: 20.0, color: Colors.white),
               ),
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  score.add(
+                    Icon(
+                      Icons.check,
+                      color: Colors.green,
+                    ),
+                  );
+                });
+              },
             ),
           ),
         ),
@@ -66,10 +83,19 @@ class _QuizPageState extends State<QuizPage> {
                 'False',
                 style: TextStyle(fontSize: 20.0, color: Colors.white),
               ),
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  score.add(
+                    Icon(Icons.close, color: Colors.red),
+                  );
+                });
+              },
             ),
           ),
         ),
+        Row(
+          children: score,
+        )
       ],
     );
   }
