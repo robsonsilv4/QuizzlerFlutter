@@ -33,22 +33,6 @@ class _QuizPageState extends State<QuizPage> {
   void checkAnswer(bool userAnswer) {
     bool correctAnswer = quizBrain.getAnswer();
     setState(() {
-      if (correctAnswer == true) {
-        score.add(
-          Icon(
-            Icons.close,
-            color: Colors.red,
-          ),
-        );
-      } else {
-        score.add(
-          Icon(
-            Icons.check,
-            color: Colors.green,
-          ),
-        );
-      }
-
       if (quizBrain.isFinished()) {
         Alert(
           context: context,
@@ -68,6 +52,21 @@ class _QuizPageState extends State<QuizPage> {
         quizBrain.reset();
         score.clear();
       } else {
+        if (correctAnswer == true) {
+          score.add(
+            Icon(
+              Icons.close,
+              color: Colors.red,
+            ),
+          );
+        } else {
+          score.add(
+            Icon(
+              Icons.check,
+              color: Colors.green,
+            ),
+          );
+        }
         quizBrain.nextQuestion();
       }
     });
