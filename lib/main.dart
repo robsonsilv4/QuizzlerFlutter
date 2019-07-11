@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizzler/quiz_brain.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 void main() => runApp(Quizzler());
 
@@ -47,7 +48,28 @@ class _QuizPageState extends State<QuizPage> {
           ),
         );
       }
-      quizBrain.nextQuestion();
+
+      if (quizBrain.isFinished()) {
+        Alert(
+          context: context,
+          title: "Finished Game!",
+          desc: "Play Again.",
+          buttons: [
+            DialogButton(
+              child: Text(
+                "Play",
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              onPressed: () => Navigator.pop(context),
+              width: 120,
+            )
+          ],
+        ).show();
+        quizBrain.reset();
+        score.clear();
+      } else {
+        quizBrain.nextQuestion();
+      }
     });
   }
 
